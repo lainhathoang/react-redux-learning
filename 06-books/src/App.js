@@ -1,30 +1,53 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
 function App() {
   const [books, setBooks] = useState([]);
 
-  const createBook = (title) => {
-    const updatedBook = [
-      ...books,
-      {
-        id: Math.floor(Math.random() * 9999),
-        title,
-      },
-    ];
+  const fetchBooks = async () => {
+    const response = await axios.get("http://localhost:3001/books");
+
+    setBooks(response.data);
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const createBook = async (title) => {
+    const response = await axios.post("http://localhost:3001/books", {
+      title,
+    });
+
+    const updatedBook = [...books, response.data];
     setBooks(updatedBook);
   };
 
-  const deleteBook = (idToRemove) => {
+  const deleteBook = async (idToRemove) => {
+    const response = await axios.delete(
+      `http://localhost:3001/books/${idToRemove}`
+    );
+
     const updatedBooks = books.filter((book) => book.id !== idToRemove);
     setBooks(updatedBooks);
   };
 
-  const editBook = (idToEdit, title) => {
+  // when updated succesfully -> use response data re-update in local
+  const editBook = async (idToEdit, newTitle) => {
+    const response = await axios.put(
+      `http://localhost:3001/books/${idToEdit}`,
+      {
+        title: newTitle,
+      }
+    );
+
+    // ...response.data -> different data between server & local
+
     const updateBooks = books.map((book) => {
       if (book.id === idToEdit) {
-        return { ...book, title };
+        return { ...book, ...response.data };
       }
       return book;
     });
