@@ -1,31 +1,27 @@
 import { useState } from "react";
 import BookEdit from "./BookEdit";
+import useBooksContext from "../hooks/use-books-context";
 
-function BookShow({ book, onDelete, onEdit }) {
+function BookShow({ book }) {
   const [showEdit, setShowEdit] = useState(false);
+  const { deleteBook } = useBooksContext();
 
   const handleClick = () => {
-    onDelete(book.id);
+    deleteBook(book.id);
   };
 
   const handleClickEdit = () => {
     setShowEdit(!showEdit);
   };
 
-  /**
-   * dont need to pass onEdit() & handleEditDisplay() to
-   * the child component
-   * - just need to combie all of them into one function
-   * handleSubmit() and pass only this function to the child
-   */
-  const handleEdit = (newTitle) => {
+  // hide the form after the title was changed
+  const handleSubmit = () => {
     setShowEdit(!showEdit);
-    onEdit(book.id, newTitle);
   };
 
   let content = <h3>{book.title}</h3>;
   if (showEdit) {
-    content = <BookEdit book={book} onEdit={handleEdit} />;
+    content = <BookEdit book={book} onSubmit={handleSubmit} />;
   }
 
   return (
