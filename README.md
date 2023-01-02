@@ -18,5 +18,3 @@ push
 create pull request
 
 review & merge
-
-bla bla
