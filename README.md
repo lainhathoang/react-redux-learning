@@ -1,4 +1,5 @@
 # react-redux-learning
+
 practice React n Redux skills
 
 checkout main
@@ -18,3 +19,5 @@ push
 create pull request
 
 review & merge
+
+test github action
