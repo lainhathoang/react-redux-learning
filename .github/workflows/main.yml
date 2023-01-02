@@ -1,0 +1,26 @@
+name: Auto merge
+
+on:
+  push:
+    branches:
+      - "feature/*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Create a pull request
+      - uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Auto merge"
+          body: "This pull request was automatically created and merged by a GitHub Action."
+          head: ${{ github.ref }}
+          base: main
+
+      # Merge the pull request
+      - uses: peter-evans/merge-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
