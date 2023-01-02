@@ -19,8 +19,3 @@ jobs:
           body: "This pull request was automatically created and merged by a GitHub Action."
           head: ${{ github.ref }}
           base: main
-
-      # Merge the pull request
-      - uses: peter-evans/merge-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
