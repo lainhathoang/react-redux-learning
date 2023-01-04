@@ -18,3 +18,5 @@ push
 create pull request
 
 review & merge
+
+research about github action
