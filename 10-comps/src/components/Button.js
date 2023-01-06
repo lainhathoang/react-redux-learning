@@ -17,7 +17,7 @@ function Button({
   rounded,
   ...rest
 }) {
-  console.log(rest);
+  // console.log(rest);
 
   // rest.className -> lay cac className tu component custom de pass xuong
   const classes = classNames(
