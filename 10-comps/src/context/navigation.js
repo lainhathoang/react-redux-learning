@@ -7,8 +7,10 @@ const NavigationProvider = ({ children }) => {
 
   useEffect(() => {
     const handler = () => {
+      // get the address name in address bar
       setCurrentPath(window.location.pathname);
     };
+    // add for each component
     window.addEventListener("popstate", handler);
 
     // clean this event popState when user takes a full reload of this page
