@@ -2,21 +2,69 @@ import { useReducer } from "react";
 import Button from "../components/Button";
 import Panel from "../components/Panel";
 
-const reducer = (state, action) => {
-  //
-  if (action.type === "increment") {
-    return {
-      ...state,
-      count: state.count + 1,
-    };
-  }
+// 1. add a new constant action type
+// 2. add a call to "dispatch"
+// 3. add a new case statement to handle
 
-  if (action.type === "change-value-to-add") {
-    return {
-      ...state,
-      valueToAdd: action.payload,
-    };
+/**
+ * keep dispatch simple =>   move logic to reducer() function
+ * less duplicated code if u need to dispatch the same action in multiple places
+ * part of the goal of reducers is to have a very specific set of was that state can be changed
+ */
+
+const INCREMENT_COUNT = "increment";
+const DECREMENT_COUNT = "decrement";
+const SET_VALUE_TO_ADD = "change_value_to_add";
+const ADD_VALUE_TO_COUNT = "add_value_to_count";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case INCREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count + 1,
+      };
+    case DECREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count - 1,
+      };
+    case SET_VALUE_TO_ADD:
+      return {
+        ...state,
+        valueToAdd: action.payload,
+      };
+    case ADD_VALUE_TO_COUNT:
+      // u can change data from "payload" or in here
+      //return {
+      //...state,
+      //...action.payload
+      //} => NOT CLEAN
+      return {
+        ...state,
+        count: state.count + state.valueToAdd,
+        valueToAdd: 0,
+      };
+    default:
+      // throw new Error("unexpected action type: " + action.type);
+      // or
+      return state;
+    //-> state doesn't change
   }
+  //
+  // if (action.type === INCREMENT_COUNT) {
+  //   return {
+  //     ...state,
+  //     count: state.count + 1,
+  //   };
+  // }
+
+  // if (action.type === SET_VALUE_TO_ADD) {
+  //   return {
+  //     ...state,
+  //     valueToAdd: action.payload,
+  //   };
+  // }
 };
 
 function CounterPage({ initalCount }) {
@@ -32,12 +80,15 @@ function CounterPage({ initalCount }) {
   const increment = () => {
     // setCount(count + 1);
     dispatch({
-      type: "increment",
+      type: INCREMENT_COUNT,
     });
   };
 
   const decrement = () => {
     // setCount(count - 1);
+    dispatch({
+      type: DECREMENT_COUNT,
+    });
   };
 
   const handleChange = (event) => {
@@ -45,7 +96,7 @@ function CounterPage({ initalCount }) {
     // setValueToAdd(value);
 
     dispatch({
-      type: "change-value-to-add",
+      type: SET_VALUE_TO_ADD,
       payload: value,
     });
   };
@@ -55,6 +106,9 @@ function CounterPage({ initalCount }) {
 
     // setCount(count + valueToAdd);
     // setValueToAdd(0);
+    dispatch({
+      type: ADD_VALUE_TO_COUNT,
+    });
   };
 
   return (
