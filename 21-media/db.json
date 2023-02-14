@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "hoanglai"
+    },
+    {
+      "name": "Olga Satterfield",
+      "id": 3
+    },
+    {
+      "name": "Dr. Derrick Brekke DVM",
+      "id": 4
+    },
+    {
+      "name": "Melissa Hamill",
+      "id": 5
+    }
+  ],
+  "albums": [
+    {
+      "id": 10,
+      "title": "lam deo gi",
+      "userId": 1
+    },
+    {
+      "id": 100,
+      "title": "lon roi",
+      "userId": 5
+    },
+    {
+      "userId": 1,
+      "title": "Tasty Granite Shirt",
+      "id": 102
+    },
+    {
+      "userId": 1,
+      "title": "Electronic Cotton Bike",
+      "id": 103
+    }
+  ],
+  "photos": [
+    {
+      "albumId": 103,
+      "url": "https://loremflickr.com/150/150/abstract?lock=66792",
+      "id": 1
+    },
+    {
+      "albumId": 102,
+      "url": "https://loremflickr.com/150/150/abstract?lock=95545",
+      "id": 2
+    },
+    {
+      "albumId": 10,
+      "url": "https://loremflickr.com/150/150/abstract?lock=68342",
+      "id": 4
+    },
+    {
+      "albumId": 10,
+      "url": "https://loremflickr.com/150/150/abstract?lock=19296",
+      "id": 5
+    }
+  ]
+}
